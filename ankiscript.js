@@ -15,7 +15,14 @@ function formatString(type, string) {
 	return text;
 }
 
-if (document.getElementById("colorTehKanji")) {
-  var text = document.getElementById("colorTehKanji").innerHTML;
-  document.getElementById("colorTehKanji").innerHTML = formatString("colorTehKanji", text);
+// get all the class objects 
+var obClasses = document.getElementsByClassName("colorThis");
+
+// colorized all if exist
+if (obClasses) {
+	var i;
+	for (i = 0; i < obClasses.length; i++) {
+		var text = obClasses[i].innerHTML;
+  		obClasses[i].innerHTML = formatString("colorThis", text);
+	}
 }
