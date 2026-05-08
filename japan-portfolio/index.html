@@ -349,6 +349,7 @@
   <div class="nav-logo">fadli.dev</div>
   <ul class="nav-links">
     <li><a href="#skills">スキル</a></li>
+    <li><a href="#experience">経験グラフ</a></li>
     <li><a href="#career">職歴</a></li>
     <li><a href="#education">学歴</a></li>
     <li><a href="#pr">自己PR</a></li>
@@ -371,7 +372,7 @@
     <div class="hero-meta">
       <div class="meta-item"><div class="dot"></div><span>43歳　男性</span></div>
       <div class="meta-item"><div class="dot"></div><span>マレーシア国籍</span></div>
-      <div class="meta-item"><div class="dot"></div><span>最寄駅：東急東横線</span></div>
+      <div class="meta-item"><div class="dot"></div><span>沿線：東急東横線沿線</span></div>
       <div class="meta-item"><div class="dot"></div><span>日本語：日常会話〜業務レベル</span></div>
       <div class="meta-item"><div class="dot"></div><span>就労ビザ保有</span></div>
     </div>
@@ -465,6 +466,131 @@
       </div>
     </div>
   </section>
+
+  <!-- EXPERIENCE CHARTS -->
+  <section id="experience">
+    <div class="section-label">Experience</div>
+    <h2>経験グラフ</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:2.5rem;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;">
+        <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:4px;">総経験年数</div>
+        <div style="font-size:1.8rem;font-weight:700;color:var(--text);">18+</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">年</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;">
+        <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:4px;">主要言語数</div>
+        <div style="font-size:1.8rem;font-weight:700;color:var(--text);">10</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">言語</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;">
+        <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:4px;">在籍企業数</div>
+        <div style="font-size:1.8rem;font-weight:700;color:var(--text);">5</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">社</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;">
+        <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:4px;">日本での経験</div>
+        <div style="font-size:1.8rem;font-weight:700;color:var(--text);">6+</div>
+        <div style="font-size:0.72rem;color:var(--text-muted);">年</div>
+      </div>
+    </div>
+
+    <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:10px;font-weight:500;">言語別 実務経験年数</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+      <span style="display:flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--text-muted);"><span style="width:10px;height:10px;border-radius:2px;background:#4f8ef7;display:inline-block;"></span>Android / モバイル</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--text-muted);"><span style="width:10px;height:10px;border-radius:2px;background:#7ec8a4;display:inline-block;"></span>ゲーム開発</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--text-muted);"><span style="width:10px;height:10px;border-radius:2px;background:#f7a84f;display:inline-block;"></span>Web / バックエンド</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--text-muted);"><span style="width:10px;height:10px;border-radius:2px;background:#545e7a;display:inline-block;"></span>その他</span>
+    </div>
+    <div style="position:relative;width:100%;height:300px;margin-bottom:3rem;">
+      <canvas id="langChart" role="img" aria-label="言語別経験年数の横棒グラフ。C++ 15年が最長。">言語別経験年数: C++ 15年, Java(Android) 8年, PHP 7年, Cocos2d-x 6年, JavaScript 5年, Objective-C 5年, Kotlin 4年, C# .NET 4年, Python 3年, Node.js 3年</canvas>
+    </div>
+
+    <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:16px;font-weight:500;">キャリアタイムライン</div>
+    <div style="position:relative;">
+      <div style="position:absolute;left:112px;top:0;bottom:0;width:1px;background:var(--border);"></div>
+      <div id="exp-timeline"></div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script>
+  (function() {
+    const langs = [
+      { label: 'C++',           years: 15, cat: 'game'    },
+      { label: 'Java (Android)',years: 8,  cat: 'android' },
+      { label: 'PHP',           years: 7,  cat: 'web'     },
+      { label: 'Cocos2d-x',    years: 6,  cat: 'game'    },
+      { label: 'JavaScript',   years: 5,  cat: 'web'     },
+      { label: 'Objective-C',  years: 5,  cat: 'android' },
+      { label: 'Kotlin',       years: 4,  cat: 'android' },
+      { label: 'C# / .NET',    years: 4,  cat: 'android' },
+      { label: 'Python',       years: 3,  cat: 'other'   },
+      { label: 'Node.js',      years: 3,  cat: 'web'     },
+    ];
+    const catColors = { android:'#4f8ef7', game:'#7ec8a4', web:'#f7a84f', other:'#545e7a' };
+    const sorted = [...langs].sort((a,b) => b.years - a.years);
+
+    new Chart(document.getElementById('langChart'), {
+      type: 'bar',
+      data: {
+        labels: sorted.map(l => l.label),
+        datasets: [{
+          data: sorted.map(l => l.years),
+          backgroundColor: sorted.map(l => catColors[l.cat]),
+          borderRadius: 4,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ' ' + ctx.raw + '年以上' } }
+        },
+        scales: {
+          x: {
+            beginAtZero: true, max: 18,
+            ticks: { callback: v => v + '年', color: '#545e7a', font: { size: 11 } },
+            grid: { color: 'rgba(255,255,255,0.05)' }
+          },
+          y: {
+            ticks: { color: '#8891aa', font: { size: 12 } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    const jobs = [
+      { period: '2008〜2010',  name: 'Telekom Applied Business',  tech: 'C++, PHP',                  years: 2.3, color: '#545e7a' },
+      { period: '2010〜2015',  name: 'Terato Tech',               tech: 'C++, Java, PHP, Cocos2d-x', years: 5.3, color: '#4f8ef7' },
+      { period: '2016.01〜03', name: 'MyEG Service',              tech: 'Java (Android), PHP',        years: 0.3, color: '#7ec8a4' },
+      { period: '2016〜2018',  name: 'Weraku Games',              tech: 'C++, Obj-C, Cocos2d-x',     years: 2.5, color: '#7ec8a4' },
+      { period: '2019〜2021',  name: 'デジタリーフ',              tech: 'C++, C#, PHP',               years: 1.7, color: '#f7a84f' },
+      { period: '2021〜現在',  name: 'Phoenixテクノロジーズ',     tech: 'Kotlin, Java, C# MAUI',      years: 4.9, color: '#4f8ef7' },
+    ];
+    const maxYears = 5.3;
+    const container = document.getElementById('exp-timeline');
+    jobs.forEach(j => {
+      const barW = Math.max(6, Math.round((j.years / maxYears) * 100));
+      const row = document.createElement('div');
+      row.style.cssText = 'display:grid;grid-template-columns:112px 1fr;gap:0 16px;margin-bottom:16px;align-items:center;';
+      row.innerHTML =
+        '<div style="text-align:right;padding-right:16px;font-size:0.7rem;color:var(--text-dim);line-height:1.4;">' + j.period + '</div>' +
+        '<div>' +
+          '<div style="font-size:0.82rem;font-weight:500;color:var(--text);margin-bottom:4px;">' + j.name + '</div>' +
+          '<div style="display:flex;align-items:center;gap:8px;">' +
+            '<div style="height:8px;border-radius:4px;background:' + j.color + ';width:' + barW + '%;opacity:0.85;flex-shrink:0;"></div>' +
+            '<span style="font-size:0.7rem;color:var(--text-muted);white-space:nowrap;">' + j.tech + '</span>' +
+          '</div>' +
+        '</div>';
+      container.appendChild(row);
+    });
+  })();
+  </script>
 
   <!-- CAREER -->
   <section id="career">
@@ -725,8 +851,8 @@
       <div class="contact-item" style="cursor:default;">
         <div class="contact-icon">🚃</div>
         <div>
-          <div class="contact-label">最寄駅</div>
-          <div class="contact-value">東急東横線</div>
+          <div class="contact-label">沿線</div>
+          <div class="contact-value">東急東横線沿線</div>
         </div>
       </div>
       <div class="contact-item" style="cursor:default;">
