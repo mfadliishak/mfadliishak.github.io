@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MuhamadFadli binIshak | エンジニアポートフォリオ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181c27;
+    --surface2: #1e2232;
+    --border: #2a2f45;
+    --accent: #4f8ef7;
+    --accent2: #7ec8a4;
+    --accent3: #f7a84f;
+    --text: #e8eaf0;
+    --text-muted: #8891aa;
+    --text-dim: #545e7a;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,17,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.8rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 400;
+    transition: color 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* LAYOUT */
+  main { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.6rem;
+    font-weight: 400;
+  }
+  .hero-summary {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    max-width: 620px;
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-family: 'DM Mono', monospace;
+  }
+  .meta-item span { color: var(--text-muted); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
+
+  /* SECTION */
+  section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* SKILLS GRID */
+  .skills-grid {
+    display: grid;
+    gap: 0.8rem;
+  }
+  .skill-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.75rem 1rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  .skill-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .tag.highlight { border-color: var(--accent); color: var(--accent); background: rgba(79,142,247,0.08); }
+  .tag.green { border-color: var(--accent2); color: var(--accent2); background: rgba(126,200,164,0.08); }
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0 1.5rem;
+    padding: 1.6rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    padding-top: 0.15rem;
+    line-height: 1.5;
+  }
+  .timeline-period strong {
+    display: block;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+  .timeline-content {}
+  .timeline-company {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+  .timeline-role {
+    font-size: 0.78rem;
+    color: var(--accent2);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 0.7rem;
+  }
+  .timeline-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .timeline-desc ul { padding-left: 1.1rem; }
+  .timeline-desc li { margin-bottom: 0.3rem; }
+  .timeline-tech {
+    margin-top: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .timeline-note {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  /* EDUCATION */
+  .edu-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .edu-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0 1rem;
+    padding: 0.9rem 1rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    padding-top: 0.1rem;
+  }
+  .edu-school { font-size: 0.88rem; font-weight: 500; }
+  .edu-dept { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+  /* PR */
+  .pr-blocks { display: grid; gap: 1rem; }
+  .pr-block {
+    padding: 1.2rem 1.3rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+  }
+  .pr-block h3 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .pr-block p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.85; }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: var(--accent); }
+  .contact-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+  .contact-label { font-size: 0.7rem; color: var(--text-dim); }
+  .contact-value { font-size: 0.82rem; color: var(--text); font-weight: 500; }
+
+  /* RESPONSIVE */
+  @media (max-width: 580px) {
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
+    .timeline-period { display: flex; gap: 0.5rem; align-items: baseline; }
+    .skill-row { grid-template-columns: 1fr; gap: 0.4rem; }
+    .edu-item { grid-template-columns: 1fr; }
+    .edu-year { font-size: 0.68rem; }
+  }
+
+  /* FADE IN ANIMATION */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero { animation: fadeUp 0.6s ease both; }
+  section { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">fadli.dev</div>
+  <ul class="nav-links">
+    <li><a href="#skills">スキル</a></li>
+    <li><a href="#career">職歴</a></li>
+    <li><a href="#education">学歴</a></li>
+    <li><a href="#pr">自己PR</a></li>
+    <li><a href="#contact">連絡先</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Software Engineer</div>
+    <h1>MuhamadFadli binIshak</h1>
+    <p class="hero-sub">ムハンマドファディリ　ビンイスハック</p>
+    <p class="hero-summary">
+      マレーシア出身のソフトウェアエンジニアとして、約18年以上のシステム開発経験を有します。
+      C++・Java・Kotlin・C#・PHPなど複数言語に精通し、特にAndroidアプリ開発を強みとしています。
+      現在は日本国内で正社員として、Androidエンジニアのポジションを目指しております。
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item"><div class="dot"></div><span>43歳　男性</span></div>
+      <div class="meta-item"><div class="dot"></div><span>マレーシア国籍</span></div>
+      <div class="meta-item"><div class="dot"></div><span>最寄駅：東急東横線</span></div>
+      <div class="meta-item"><div class="dot"></div><span>日本語：日常会話〜業務レベル</span></div>
+      <div class="meta-item"><div class="dot"></div><span>就労ビザ保有</span></div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Skills</div>
+    <h2>保有スキル</h2>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <div class="skill-label">言語</div>
+        <div class="skill-tags">
+          <span class="tag highlight">Kotlin</span>
+          <span class="tag highlight">Java</span>
+          <span class="tag highlight">C#</span>
+          <span class="tag highlight">C++</span>
+          <span class="tag">PHP</span>
+          <span class="tag">Python</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Objective-C</span>
+          <span class="tag">Lua</span>
+          <span class="tag">Node.js</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">モバイル開発</div>
+        <div class="skill-tags">
+          <span class="tag highlight">Android (Kotlin)</span>
+          <span class="tag highlight">Android (Java)</span>
+          <span class="tag highlight">C# .NET MAUI</span>
+          <span class="tag">iOS (Objective-C)</span>
+          <span class="tag">Cocos2d-x</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">FW・ライブラリ</div>
+        <div class="skill-tags">
+          <span class="tag">Android Jetpack</span>
+          <span class="tag">RxJava</span>
+          <span class="tag">Retrofit</span>
+          <span class="tag">OkHttp3</span>
+          <span class="tag">Coroutine / Flow</span>
+          <span class="tag">Dagger</span>
+          <span class="tag">CakePHP</span>
+          <span class="tag">Laravel</span>
+          <span class="tag">GTK</span>
+          <span class="tag">.NET Framework</span>
+          <span class="tag">Qt</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">アーキテクチャ</div>
+        <div class="skill-tags">
+          <span class="tag green">MVVM</span>
+          <span class="tag green">MVP</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">DB</div>
+        <div class="skill-tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Redis</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">クラウド・ツール</div>
+        <div class="skill-tags">
+          <span class="tag">AWS (EC2 / CLI)</span>
+          <span class="tag">Git</span>
+          <span class="tag">Subversion</span>
+          <span class="tag">Docker（個人）</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">OS・環境</div>
+        <div class="skill-tags">
+          <span class="tag">Android</span>
+          <span class="tag">Windows</span>
+          <span class="tag">Linux</span>
+          <span class="tag">macOS</span>
+          <span class="tag">iOS</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">資格・認証</div>
+        <div class="skill-tags">
+          <span class="tag green">ISO 9001:2008 内部品質監査認証</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER -->
+  <section id="career">
+    <div class="section-label">Career</div>
+    <h2>職務経歴</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-period">
+          <strong>2021年8月 〜 現在</strong>
+          （約4年10ヶ月）
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">株式会社Phoenixテクノロジーズ</div>
+          <div class="timeline-role">SE・PG　｜　SES企業・客先常駐</div>
+          <div class="timeline-desc">
+            <p style="margin-bottom:0.6rem;font-weight:500;font-size:0.83rem;color:var(--text)">【交通系 Android アプリ開発】 <span style="font-weight:300;color:var(--text-dim)">C# / .NET MAUI　｜　チーム規模：10〜15名以上</span></p>
+            <ul>
+              <li>全国交通系 Android アプリの新機能開発および既存機能の保守</li>
+              <li>新決済システム導入に向けた既存 UI およびアプリフローの改善</li>
+              <li>新機能要件に対応するための既存アプリ調査・分析、各種設計書への反映</li>
+            </ul>
+            <p style="margin-top:0.8rem;margin-bottom:0.6rem;font-weight:500;font-size:0.83rem;color:var(--text)">【エンターテインメント向け Android アプリ開発（複数チーム）】 <span style="font-weight:300;color:var(--text-dim)">Kotlin / Java / Python / C++</span></p>
+            <ul>
+              <li>全国エンターテインメント施設向けカスタム Android デバイス用ソフトウェアの新規開発</li>
+              <li>MVVM ベースのチーム共通アーキテクチャを設計・実装（ドキュメント・ルール整備含む）</li>
+              <li>旧システムと比較し、<strong style="color:var(--accent3)">起動処理時間を 20〜25％削減</strong></li>
+              <li>多言語対応カスタムキーボード（韓国語・中国語・英語・日本語フリック）をゼロから実装</li>
+              <li>Retrofit / OkHttp3 を使用した API マネージャーを新規開発し、既存 Java ライブラリから移植</li>
+              <li><strong style="color:var(--accent3)">RenderScript による RGB カラー変換処理を GPU へ移行し処理時間を 30％削減</strong></li>
+            </ul>
+          </div>
+          <div class="timeline-tech">
+            <span class="tag highlight">Kotlin</span><span class="tag highlight">Java (Android)</span>
+            <span class="tag highlight">C# / .NET MAUI</span><span class="tag">Python</span><span class="tag">C++</span>
+            <span class="tag">Retrofit</span><span class="tag">MVVM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">
+          <strong>2021年6月 〜 2021年7月</strong>
+          （約2ヶ月）
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">― キャリアチェンジ準備期間 ―</div>
+          <div class="timeline-role">転職活動・スキル整理・自己学習</div>
+          <div class="timeline-note">
+            前職（株式会社デジタリーフ）の会社合併に伴う組織変更を受け、今後のキャリアを見直すため退職。
+            転職活動と並行して技術スキルの棚卸し・整理および自己学習を実施。
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">
+          <strong>2019年10月 〜 2021年5月</strong>
+          （1年8ヶ月）
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">株式会社デジタリーフ</div>
+          <div class="timeline-role">SE・PG　｜　カスタムソリューションプロバイダー　｜　チーム規模：20名</div>
+          <div class="timeline-desc">
+            <ul>
+              <li>勤怠管理システムの概要設計書および詳細設計書を作成</li>
+              <li>PHP および Zoom API を用いた人材育成システム（テレビ会議機能含む）の開発</li>
+              <li>C++ / GTK / PHP を使用した自動検知型環境監視カメラシステムの開発（IoT・クラウド連携）</li>
+              <li>C# および .NET Framework を用いた医療介護向けコミュニケーションシステムの開発・保守</li>
+            </ul>
+          </div>
+          <div class="timeline-tech">
+            <span class="tag">C++</span><span class="tag">C#</span><span class="tag">PHP</span>
+            <span class="tag">GTK</span><span class="tag">.NET Framework</span><span class="tag">MySQL</span><span class="tag">CakePHP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">
+          <strong>2018年9月 〜 2019年9月</strong>
+          （1年1ヶ月）
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">― 来日・日本語学習期間 ―</div>
+          <div class="timeline-role">新宿日本語学校</div>
+          <div class="timeline-note">
+            日本での長期的なキャリア形成を目指しマレーシアから来日。
+            新宿日本語学校にて日本語を集中的に学習（読み・書き・会話）し、業務文化への適応を実施。
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">
+          <strong>2016年4月 〜 2018年8月</strong>
+          （2年5ヶ月）
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">Weraku Games（ウェラクゲームス）</div>
+          <div class="timeline-role">SE　｜　エンターテインメント企業（マレーシア）　｜　チーム規模：6名</div>
+          <div class="timeline-desc">
+            <ul>
+              <li>Cocos2d-x フレームワークを用い、iOS / Android 向けモバイルゲームを5本開発（パズル・カードRPG・サイドスクローラー等）</li>
+              <li>システム設計・データ設計の詳細設計を担当</li>
+              <li>Node.js / C++ / Bash を用いて社内全プロジェクト共通の SDK / ツール / コンバーターを複数開発</li>
+              <li>ゲームプレイロジック・UI・アニメーション・エフェクト・サードパーティ SDK 統合を担当</li>
+            </ul>
+          </div>
+          <div class="timeline-tech">
+            <span class="tag">C++</span><span class="tag">Objective-C</span><span class="tag">Java</span>
+            <span class="tag">Node.js</span><span class="tag">Cocos2d-x</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">
+          <strong>2016年1月 〜 2016年3月</strong>
+          （3ヶ月）
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">MyEG Service（MyEGサービス）</div>
+          <div class="timeline-role">SE　｜　政府関連 B2B/B2C 企業（マレーシア）　｜　チーム規模：6名</div>
+          <div class="timeline-desc">
+            <ul>
+              <li>B2C向け Android モバイルアプリ「MyEG Services」の開発（MVP アーキテクチャ、ReactiveX / Retrofit / Dagger 使用）</li>
+              <li>UX 設計・RESTful API 連携・データ操作処理の実装</li>
+              <li>データ暗号化・API・トランザクション処理検証用バックエンドサーバーを独自構築</li>
+            </ul>
+          </div>
+          <div class="timeline-tech">
+            <span class="tag">Java (Android)</span><span class="tag">PHP</span><span class="tag">MySQL</span>
+            <span class="tag">Laravel</span><span class="tag">MVP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">
+          <strong>2010年10月 〜 2015年12月</strong>
+          （5年3ヶ月）
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">Terato Tech（テラトテック）</div>
+          <div class="timeline-role">PG　｜　カスタムソリューションプロバイダー（マレーシア）　｜　チーム規模：20名</div>
+          <div class="timeline-desc">
+            <ul>
+              <li>地元銀行向け Android モバイルアプリ開発</li>
+              <li>ゲーム会社と連携し、ソーシャルオンラインカードゲームを開発（カードフュージョン・トレーディング・SNS 連携・カードバトル等）</li>
+              <li>AWS CLI を用いた EC2 インスタンスの作成・削除等、クラウドリソースの管理を実施</li>
+            </ul>
+          </div>
+          <div class="timeline-tech">
+            <span class="tag">C++</span><span class="tag">Objective-C</span><span class="tag">Java</span>
+            <span class="tag">PHP</span><span class="tag">Lua</span><span class="tag">MySQL</span>
+            <span class="tag">Redis</span><span class="tag">Cocos2d-x</span><span class="tag">AWS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">
+          <strong>2008年7月 〜 2010年9月</strong>
+          （2年3ヶ月）
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-company">Telekom Applied Business（テレコムアプライドビジネス）</div>
+          <div class="timeline-role">PG　｜　政府系ソフトウェア会社（マレーシア）　｜　チーム規模：20名</div>
+          <div class="timeline-desc">
+            <ul>
+              <li>SMS メッセージングシステムポータルの Web フロントエンド・バックエンド開発（バルクSMS送信モジュール含む）</li>
+              <li>B2B 向け OpenAPI インターフェース開発</li>
+              <li>ファックスデータと SMS の双方向変換コンバーター開発</li>
+              <li>C++ / PHP を用いたバックエンド処理の実装。Subversion によるバージョン管理</li>
+            </ul>
+          </div>
+          <div class="timeline-tech">
+            <span class="tag">C++</span><span class="tag">PHP</span><span class="tag">HTML/JS/CSS</span>
+            <span class="tag">PostgreSQL</span><span class="tag">Qt</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Education</div>
+    <h2>学歴</h2>
+    <div class="edu-grid">
+      <div class="edu-item">
+        <div class="edu-year">2000年2月<br>〜 2003年8月</div>
+        <div>
+          <div class="edu-school">Universiti Teknologi Malaysia</div>
+          <div class="edu-dept">コンピュータサイエンス学科（ディプロマ）卒業</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2004年7月<br>〜 2008年1月</div>
+        <div>
+          <div class="edu-school">Multimedia University</div>
+          <div class="edu-dept">ソフトウェアエンジニアリング・ゲームデザイン学科　卒業</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2018年10月<br>〜 2019年9月</div>
+        <div>
+          <div class="edu-school">新宿日本語学校</div>
+          <div class="edu-dept">日本語課程　修了</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PR -->
+  <section id="pr">
+    <div class="section-label">About</div>
+    <h2>自己PR</h2>
+    <div class="pr-blocks">
+      <div class="pr-block">
+        <h3>🌐 多言語・マルチプラットフォームに対応できる実践力</h3>
+        <p>Kotlin・Java・C#・C++・PHPなど複数言語を実務で使用してきました。Androidアプリ開発を主軸としながら、ゲーム・IoT・業務システムと幅広い分野での開発経験があり、新しい技術習得にも積極的に取り組んでいます。</p>
+      </div>
+      <div class="pr-block" style="border-left-color: var(--accent3)">
+        <h3>📈 数値で示せる改善実績</h3>
+        <p>起動処理時間の 20〜25％削減、GPU 移行による処理時間 30％削減など、パフォーマンス改善を数値で提示できる実績があります。単なる実装にとどまらず、調査・提案書の作成から実装・検証まで一貫して担当してきました。</p>
+      </div>
+      <div class="pr-block" style="border-left-color: var(--accent2)">
+        <h3>🤝 チームへの貢献とコミュニケーション</h3>
+        <p>MVVM アーキテクチャの設計・ドキュメント整備など、チーム全体の開発効率向上に貢献した経験があります。日本語での業務経験もあり（日常会話〜業務レベル）、日本のチーム環境に適応できる素地があります。</p>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.2rem 1.3rem;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+      <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:0.5rem;font-family:'DM Mono',monospace;letter-spacing:0.06em;">志望動機</div>
+      <p style="font-size:0.86rem;color:var(--text-muted);line-height:1.9;">
+        日本でのエンジニアとしてのキャリアを正社員として安定的に継続・発展させたいと考えております。
+        SES・客先常駐の形でさまざまなプロジェクトに携わってきましたが、今後は一つの組織に深く関わり、プロダクトの成長に長期的に貢献したいと考えています。
+        Androidエンジニアとして培った技術力と、多様な開発現場で身につけた適応力・問題解決力を活かし、貢献できると確信しております。
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <h2>連絡先・希望条件</h2>
+    <div class="contact-grid">
+      <a href="mailto:fadliishak@gmail.com" class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-label">メール</div>
+          <div class="contact-value">fadliishak@gmail.com</div>
+        </div>
+      </a>
+      <div class="contact-item" style="cursor:default;">
+        <div class="contact-icon">🚃</div>
+        <div>
+          <div class="contact-label">最寄駅</div>
+          <div class="contact-value">東急東横線</div>
+        </div>
+      </div>
+      <div class="contact-item" style="cursor:default;">
+        <div class="contact-icon">💼</div>
+        <div>
+          <div class="contact-label">希望職種 / 雇用形態</div>
+          <div class="contact-value">Android エンジニア　／　正社員</div>
+        </div>
+      </div>
+      <div class="contact-item" style="cursor:default;">
+        <div class="contact-icon">📋</div>
+        <div>
+          <div class="contact-label">就業可能日 / 在留資格</div>
+          <div class="contact-value">応相談　／　就労可能ビザ保有</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
